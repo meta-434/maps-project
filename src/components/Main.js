@@ -1,9 +1,15 @@
+<<<<<<< Updated upstream
 import React, { Component } from 'react';
 import axios from 'axios';
+=======
+import axios from 'axios';
+import React, { Component } from 'react';
+>>>>>>> Stashed changes
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 class Main extends Component {
+<<<<<<< Updated upstream
     
     state = {res : null, place : null}
 
@@ -25,8 +31,30 @@ class Main extends Component {
             <div>
                 <p>Charlottesville Restaurants</p>
             </div>
+=======
+
+    state = {res : null, names: null, prices : null, }
+
+    componentDidMount() {
+        const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.041341,-78.479807&radius=50000&type=restaurant&opennow&key=" + API_KEY;
+        axios.get(url).then(response => 
+            this.setState({res : response.data.results}),
+            console.log(this.state.res),
+            this.state.res.map(item => this.setState({names : item}))  
+        );
+    }
+
+    render() {
+        return (
+            console.log(this.state.names),
+            <p>{API_KEY}</p>
+>>>>>>> Stashed changes
         );
     }
 }
 
+<<<<<<< Updated upstream
 export default Main;
+=======
+export default Main;
+>>>>>>> Stashed changes
