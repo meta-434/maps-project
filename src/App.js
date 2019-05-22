@@ -10,8 +10,8 @@ class App extends Component {
     
     return (
       <div>
+        <h1>Restaurants in Charlottesville near you:</h1>
         <Main />
-        <p>hi</p>
       </div>
     );
   }

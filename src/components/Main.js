@@ -5,29 +5,31 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 class Main extends Component {
 
-    state = {data : null, names: null, ratings : null, place : null}
+    state = {data : [], names: [], ratings : [], place : [], resultLine : ""}
 
     componentDidMount() {
-        const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.041341,-78.479807&radius=50000&type=restaurant&opennow&key=" + API_KEY;
+        const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.041341,-78.479807&type=restaurant&radius=5000&type=restaurant&opennow&key=" + API_KEY;
         axios.get(url).then(res => {
-                this.setState({ data: res.data.results });
-                this.setState({ names: res.data.results.map(item => {
-                        this.setState({
-                            names : item.name,
-                            ratings : item.rating,
-                            palce : item.vicinity
-                        })
-                    })
-                })
-                console.log(this.state.names)
+                const dataHolder = res.data.results;
+                this.setState({data : dataHolder});
+                console.log(this.state.data);
             }
         );
     }
 
+
     render() {
-        return (
-            <p>{API_KEY}</p>
-        );
+        console.log(this.state.data.name);
+        return (this.state.data.map(item => {
+            return (
+            <div>
+                {item.name}
+                <li>
+                    @ {item.vicinity}, rated {item.rating}
+                </li>
+            </div>
+            )
+        } ));
     }
 }
 
